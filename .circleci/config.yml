@@ -10,9 +10,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: terraform apply
+          name: terraform init
           command: |
             terraform init
+      - run:
+          name: terraform apply
+          command: |      
             terraform apply -auto-approve
       - store_artifacts:
           path: terraform.tfstate
