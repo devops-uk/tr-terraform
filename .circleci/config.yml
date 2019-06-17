@@ -41,5 +41,5 @@ workflows:
             - terraform_apply
       - terraform_destroy:
           requires:
-- click_here_to_delete
+            - click_here_to_delete
     
