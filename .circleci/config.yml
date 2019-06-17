@@ -18,7 +18,7 @@ jobs:
   terraform_destroy:
     working_directory: ~/tmp
     docker:
-            - image: hashicorp/terraform:light
+            - image: hashicorp/terraform:full
             - image: ubuntu
     steps:
       - checkout
