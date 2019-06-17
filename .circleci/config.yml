@@ -16,6 +16,9 @@ jobs:
             terraform apply
       - store_artifacts:
           path: terraform.tfstate
+#            environment:
+#               - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+#               - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
 
   terraform_destroy:
     working_directory: ~/tmp
