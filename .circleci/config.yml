@@ -4,41 +4,16 @@ jobs:
     working_directory: ~/tmp
     docker:
             - image: hashicorp/terraform:full
-            - image: ubuntu
     steps:
       - checkout
       - run:
           name: terraform apply
           command: |
             terraform init
-            terraform apply -auto-approve
-      - store_artifacts:
-          path: terraform.tfstate
-
-  terraform_destroy:
-    working_directory: ~/tmp
-    docker:
-            - image: hashicorp/terraform:full
-            - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: terraform destroy
-          command: |
-            terraform init
-            terraform destroy -auto-approve
-  
 
 workflows:
   version: 2.1
   terraform:
     jobs:
       - terraform_apply
-      - click_here_to_delete:
-          type: approval
-          requires:
-            - terraform_apply
-      - terraform_destroy:
-          requires:
-            - click_here_to_delete
-    
+
