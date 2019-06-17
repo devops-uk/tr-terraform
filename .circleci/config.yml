@@ -1,12 +1,45 @@
 version: 2.1
 jobs:
-  dependencies:
-  cache_directories:
-    - ../mongodb-linux-x86_64-ubuntu1204-3.2.3
-  pre:
-    - if [[ ! -d ../mongodb-linux-x86_64-ubuntu1204-3.2.3 ]]; then wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1204-3.2.3.tgz -P ../ && tar xvzf ../mongodb-linux-x86_64-ubuntu1204-3.2.3.tgz -C ../; fi
-    - sudo stop mongodb
-    - sudo cp ../mongodb-linux-x86_64-ubuntu1204-3.2.3/bin/* /usr/bin
-    - sudo start mongodb
-    - pip install asynctest
+  terraform_apply:
+    working_directory: ~/tmp
+    docker:
+            - image: hashicorp/terraform:light
+            - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: terraform apply
+          command: |
+            cd demo-1
+            terraform init
+            terraform apply -auto-approve
+      - store_artifacts:
+          path: terraform.tfstate
+
+  terraform_destroy:
+    working_directory: ~/tmp
+    docker:
+            - image: hashicorp/terraform:light
+            - image: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: terraform destroy
+          command: |
+            terraform init
+            terraform destroy -auto-approve
+  
+
+workflows:
+  version: 2.1
+  terraform:
+    jobs:
+      - terraform_apply
+      - click_here_to_delete:
+          type: approval
+          requires:
+            - terraform_apply
+      - terraform_destroy:
+          requires:
+- click_here_to_delete
     
