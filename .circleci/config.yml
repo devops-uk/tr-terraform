@@ -16,7 +16,7 @@ jobs:
       - run:
           name: terraform apply
           command: |      
-             environment:
+            environment:
                - AWS_ACCESS_KEY: $AWS_ACCESS_KEY
                - AWS_SECRET_KEY: $AWS_SECRET_KEY
             terraform apply
