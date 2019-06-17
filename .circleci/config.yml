@@ -11,10 +11,13 @@ jobs:
           command: |
             terraform init
       - run:
-          name: terraform apply
+          name: terraform plan
           command: |      
             terraform plan
-            # terraform apply
+      - run:
+          name: terraform plan
+          command: |      
+            terraform apply
       - store_artifacts:
           path: terraform.tfstate
 
