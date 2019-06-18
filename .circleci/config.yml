@@ -1,49 +1,19 @@
 version: 2.1
-jobs:
-  terraform_apply:
-    working_directory: ~/tmp
-    docker:
-            - image: hashicorp/terraform:light
-    steps:
-      - checkout
-      - run:
-          name: terraform init
-          command: |
-            terraform init
-      - run:
-          name: terraform plan
-          command: |      
-            terraform plan
-      # - run:
-      #     name: terraform apply
-      #     command: |      
-      #       terraform apply 
-      - store_artifacts:
-          path: terraform.tfstate
-
-  terraform_destroy:
-    working_directory: ~/tmp
-    docker:
-            - image: hashicorp/terraform:light        
-    steps:
-      - checkout
-      - run:
-          name: terraform destroy
-          command: |
-            terraform init
-            terraform destroy -auto-approve
-  
-
+orbs:
+  tf: ngs/terraform@0.0.1
 workflows:
-  version: 2.1
-  terraform:
+  tf:
     jobs:
-      - terraform_apply
-      - click_here_to_delete:
-          type: approval
+      - tf/validate:
+          name: validate
+      - tf/plan:
+          name: plan
           requires:
-            - terraform_apply
-      - terraform_destroy:
+            - validate
+      - tf/apply:
+          name: apply
           requires:
-            - click_here_to_delete
-    
+            - plan
+          filters:
+            branches:
+              only: master
