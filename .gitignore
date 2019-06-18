@@ -1,5 +1,21 @@
-*/terraform.tfvars
-*/terraform.tfstate
-*/terraform.tfstate.backup
-*/.terraform
-*/mykey*
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+*.tfvars
+
+# logs
+*.log
+
+# Directories
+.terraform/
+.vagrant/
+
+# SSH Keys
+*.pem
+
+# Backup files
+*.bak
+
+# Ignored Terraform files
+*gitignore*.tf
