@@ -16,6 +16,3 @@
 
 # Backup files
 *.bak
-
-# Ignored Terraform files
-*gitignore*.tf
