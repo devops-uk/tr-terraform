@@ -11,7 +11,7 @@ jobs:
           name: terraform apply
           command: |
             terraform init
-            terraform apply -auto-approve
+            # terraform apply -auto-approve
       - store_artifacts:
           path: terraform.tfstate
 
@@ -26,7 +26,7 @@ jobs:
           name: terraform destroy
           command: |
             terraform init
-            terraform destroy -auto-approve
+            # terraform destroy -auto-approve
   
 
 workflows:
