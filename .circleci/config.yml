@@ -2,7 +2,7 @@ version: 2.1
 defaults: &defaults
     working_directory: /home/circleci/workspace
     docker:
-      - image: wilson208/circleci-awscli
+      # - image: wilson208/circleci-awscli
       - image: hashicorp/terraform:light
         
 jobs:
