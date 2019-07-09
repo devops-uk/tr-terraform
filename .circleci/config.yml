@@ -19,6 +19,7 @@ jobs:
                  cd ./.circleci/terraform
                  terraform init
                  terraform plan
+                 terraform apply
 #    s3-list-naveen:
 #      <<: *defaults
 #      steps:
