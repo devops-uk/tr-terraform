@@ -4,27 +4,23 @@ jobs:
     working_directory: ~/tmp
     docker:
             - image: hashicorp/terraform:light
+            - image: ubuntu
     steps:
       - checkout
       - run:
-          name: terraform init
+          name: terraform apply
           command: |
+            cd demo-1
             terraform init
-      - run:
-          name: terraform plan
-          command: |      
-            terraform plan
-      # - run:
-      #     name: terraform apply
-      #     command: |      
-      #       terraform apply 
+            terraform apply -auto-approve
       - store_artifacts:
           path: terraform.tfstate
 
   terraform_destroy:
     working_directory: ~/tmp
     docker:
-            - image: hashicorp/terraform:light        
+            - image: hashicorp/terraform:light
+            - image: ubuntu
     steps:
       - checkout
       - run:
@@ -45,5 +41,4 @@ workflows:
             - terraform_apply
       - terraform_destroy:
           requires:
-            - click_here_to_delete
-    
+      - click_here_to_delete
