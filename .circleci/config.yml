@@ -1,43 +1,89 @@
 version: 2.1
+defaults: &defaults
+    working_directory: /home/circleci/workspace
+    docker:
+      - image: wilson208/circleci-awscli
+      - image: hashicorp/terraform:light
+        
 jobs:
-  terraform_apply:
-    working_directory: ~/tmp
-    docker:
-            - image: hashicorp/terraform:light
-            - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: terraform apply
-          command: |
-            terraform init
-            # terraform apply -auto-approve
-      - store_artifacts:
-          path: terraform.tfstate
-
-  terraform_destroy:
-    working_directory: ~/tmp
-    docker:
-            - image: hashicorp/terraform:light
-            - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: terraform destroy
-          command: |
-            terraform init
-            # terraform destroy -auto-approve
-  
+   s3-list-thirupathi:
+     <<: *defaults
+     steps:
+        - checkout
+        - run:
+            name: Permissions
+            command: chmod -R 770 /home/circleci/
+        - run: 
+            name: terraform Apply
+            command: |
+                 cd ./.circleci/terraform
+                 terraform init
+                 terraform plan
+#    s3-list-naveen:
+#      <<: *defaults
+#      steps:
+#         - checkout 
+#         - run: 
+#             name: permissions
+#             command: chmod -R 770 /home/circleci/
+#         - run:
+#             name: naveen account accessed
+#             command: |
+#                 ./.circleci/scripts/nonprod_profile.sh
+#         - run:
+#             name: send into that
+#             command: |
+#                 ./.circleci/scripts/process.sh
 
 workflows:
-  version: 2.1
-  terraform:
-    jobs:
-      - terraform_apply
-      - click_here_to_delete:
-          type: approval
-          requires:
-            - terraform_apply
-      - terraform_destroy:
-          requires:
-            - click_here_to_delete
+    version: 2
+    s3-list-out:
+      jobs: 
+         - s3-list-thirupathi
+        #  - s3-list-naveen      
+     
+
+
+# version: 2.1
+# jobs:
+#   terraform_apply:
+#     working_directory: ~/tmp
+#     docker:
+#             - image: hashicorp/terraform:light
+#             - image: ubuntu
+#     steps:
+#       - checkout
+#       - run:
+#           name: terraform apply
+#           command: |
+#             terraform init
+#             # terraform apply -auto-approve
+#       - store_artifacts:
+#           path: terraform.tfstate
+
+#   terraform_destroy:
+#     working_directory: ~/tmp
+#     docker:
+#             - image: hashicorp/terraform:light
+#             - image: ubuntu
+#     steps:
+#       - checkout
+#       - run:
+#           name: terraform destroy
+#           command: |
+#             terraform init
+#             # terraform destroy -auto-approve
+  
+
+# workflows:
+#   version: 2.1
+#   terraform:
+#     jobs:
+#       - terraform_apply
+#       - click_here_to_delete:
+#           type: approval
+#           requires:
+#             - terraform_apply
+#       - terraform_destroy:
+#           requires:
+#             - click_here_to_delete
