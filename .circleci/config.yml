@@ -17,9 +17,7 @@ jobs:
             name: terraform Apply
             command: |
                  cd ./.circleci/terraform
-                 terraform init
-                 terraform plan
-                 terraform apply -auto-approve
+                 ./test.sh
 #    s3-list-naveen:
 #      <<: *defaults
 #      steps:
