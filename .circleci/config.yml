@@ -2,9 +2,7 @@ version: 2.1
 defaults: &defaults
     working_directory: /home/circleci/workspace
     docker:
-      - image: hashicorp/terraform:light
-      - image: wilson208/circleci-awscli
- 
+      - image: thirupathip/terraform-aws:1 
         
 jobs:
    s3-list-thirupathi:
@@ -18,9 +16,9 @@ jobs:
             name: Configure of aws
             command: |
                   cd ./.circleci/terraform
-                  aws configure set aws_region ${THIRU_REGION}
-                  aws configure set aws_access_key_id ${THIRU_KEY}
-                  aws configure set aws_secret_access_key ${THIRU_SECRECT}  
+                  aws configure set aws_region ${AWS_DEFAULT_REGION}
+                  aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+                  aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}  
         - run: 
             name: terraform Apply
             command: |
