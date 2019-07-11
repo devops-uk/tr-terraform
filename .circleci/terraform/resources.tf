@@ -13,7 +13,7 @@ resource "aws_instance" "wb" {
    vpc_security_group_ids = ["${aws_security_group.sgweb.id}"]
    associate_public_ip_address = true
    source_dest_check = false
-   user_data = "${file("userdata.sh")}"1
+   user_data = "${file("userdata.sh")}"
 
   tags {
     Name = "webserver"
