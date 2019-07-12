@@ -22,6 +22,7 @@ jobs:
             name: terraform Apply
             command: |
                  cd ./environments/production
+                 ssh-keygen -y -f ~/.ssh/pemfile/mumbai.pem
                  terraform init
                  terraform plan
                 #  terraform apply -auto-approve
