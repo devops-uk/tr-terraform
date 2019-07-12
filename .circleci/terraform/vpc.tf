@@ -4,7 +4,6 @@
 resource "aws_vpc" "test" {
   cidr_block = "${var.vpc_cidr}"
   enable_dns_hostnames = "true"
-
   tags {
     Name = "test-vpc"
   }
@@ -34,7 +33,7 @@ resource "aws_subnet" "private-subnet" {
 
 # Define the internet gateway
 resource "aws_internet_gateway" "gw" {
-  vpc_id = "${aws_vpc.default.id}"
+  vpc_id = "${aws_vpc.test.id}"
 
   tags {
     Name = "VPC IGW"
