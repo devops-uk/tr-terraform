@@ -21,10 +21,7 @@ jobs:
         - run: 
             name: terraform Apply
             command: |
-<<<<<<< HEAD
-=======
                  cd ./environments/production
->>>>>>> thirupathi
                  terraform init
                  terraform plan
                 #  terraform apply -auto-approve
