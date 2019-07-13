@@ -1,5 +1,4 @@
 
-
 variable "aws_region" {
   description = "Region for the VPC"
   default = "ap-southeast-1"
