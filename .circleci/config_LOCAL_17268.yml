@@ -1,0 +1,94 @@
+version: 2.1
+defaults: &defaults
+    working_directory: /home/circleci/workspace
+    docker:
+      - image: thirupathip/terraform-aws:ubuntu
+        
+jobs:
+   s3-list-thirupathi:
+     <<: *defaults
+     steps:
+        - checkout
+        - run:
+            name: Permissions
+            command: chmod -R 770 /home/circleci/
+        - run:
+            name: Configure of aws
+            command: |
+                  aws configure set aws_region ${AWS_DEFAULT_REGION}
+                  aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+                  aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}  
+        - run: 
+            name: terraform Apply
+            command: |
+                 terraform init
+                 terraform plan
+                #  terraform apply -auto-approve
+#    s3-list-naveen:
+#      <<: *defaults
+#      steps:
+#         - checkout 
+#         - run: 
+#             name: permissions
+#             command: chmod -R 770 /home/circleci/
+#         - run:
+#             name: naveen account accessed
+#             command: |
+#                 ./.circleci/scripts/nonprod_profile.sh
+#         - run:
+#             name: send into that
+#             command: |
+#                 ./.circleci/scripts/process.sh
+
+workflows:
+    version: 2
+    s3-list-out:
+      jobs: 
+         - s3-list-thirupathi
+        #  - s3-list-naveen      
+     
+
+
+# version: 2.1
+# jobs:
+#   terraform_apply:
+#     working_directory: ~/tmp
+#     docker:
+#             - image: hashicorp/terraform:light
+#             - image: ubuntu
+#     steps:
+#       - checkout
+#       - run:
+#           name: terraform apply
+#           command: |
+#             terraform init
+#             # terraform apply -auto-approve
+#       - store_artifacts:
+#           path: terraform.tfstate
+
+#   terraform_destroy:
+#     working_directory: ~/tmp
+#     docker:
+#             - image: hashicorp/terraform:light
+#             - image: ubuntu
+#     steps:
+#       - checkout
+#       - run:
+#           name: terraform destroy
+#           command: |
+#             terraform init
+#             # terraform destroy -auto-approve
+  
+
+# workflows:
+#   version: 2.1
+#   terraform:
+#     jobs:
+#       - terraform_apply
+#       - click_here_to_delete:
+#           type: approval
+#           requires:
+#             - terraform_apply
+#       - terraform_destroy:
+#           requires:
+#             - click_here_to_delete
