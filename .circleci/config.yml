@@ -24,7 +24,7 @@ jobs:
                  cd ./environments/production
                  terraform init
                  terraform plan
-                 terraform apply -auto-approve
+                #  terraform apply -auto-approve
 #    s3-list-naveen:
 #      <<: *defaults
 #      steps:
