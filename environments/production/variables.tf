@@ -19,6 +19,11 @@ variable "private_subnet_cidr" {
   default = "10.200.2.0/24"
 }
 
+variable "key" {
+  description = "Key Pair"
+  default = "test"
+}
+
 variable "ami" {
   description = "Amazon Linux AMI"
   default = "ami-09eb5e8a83c7aa890"
