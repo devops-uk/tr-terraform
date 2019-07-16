@@ -24,11 +24,6 @@ variable "key" {
   default = "test"
 }
 
-# variable "ami" {
-#   description = "Amazon Linux AMI"
-#   default = "ami-09eb5e8a83c7aa890"
-# }
-
 variable "key_path" {
   description = "SSH Public Key path"
   default = "public_key"
