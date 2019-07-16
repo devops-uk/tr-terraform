@@ -1,7 +1,7 @@
 
 variable "aws_region" {
   description = "Region for the VPC"
-  default = "us-west-1"
+  default = "us-east-2"
 }
 
 variable "vpc_cidr" {
@@ -24,11 +24,10 @@ variable "key" {
   default = "test"
 }
 
-variable "ami" {
-  description = "Amazon Linux AMI"
-  default = "ami-09eb5e8a83c7aa890"
-
-}
+# variable "ami" {
+#   description = "Amazon Linux AMI"
+#   default = "ami-09eb5e8a83c7aa890"
+# }
 
 variable "key_path" {
   description = "SSH Public Key path"
