@@ -39,7 +39,7 @@ resource "aws_instance" "wb" {
 # Define database inside the private subnet
 resource "aws_instance" "db" {
    ami  = "${var.ami}"
-  #  instance_type = "t1.micro"
+   instance_type = "t1.micro"
   #  subnet_id = "${aws_subnet.private-subnet.id}"
   #  vpc_security_group_ids = ["${aws_security_group.sgdb.id}"]
   #  source_dest_check = false
