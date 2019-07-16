@@ -25,11 +25,7 @@ jobs:
                  terraform init
                  terraform plan
                  terraform apply -auto-approve
-        - run: 
-            name: terraform Destroy
-            command: |
-                 cd ./environments/production
-                 terraform destroy -auto-approve         
+                 terraform destroy -auto-approve
 #    s3-list-naveen:
 #      <<: *defaults
 #      steps:
