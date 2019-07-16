@@ -25,7 +25,7 @@ jobs:
                  terraform init
                  terraform plan
                  terraform apply -auto-approve
-                 terraform destroy
+                 terraform destroy -auto-approve
 #    s3-list-naveen:
 #      <<: *defaults
 #      steps:

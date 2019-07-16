@@ -14,7 +14,7 @@ resource "aws_vpc" "test" {
 resource "aws_subnet" "public-subnet" {
   vpc_id = "${aws_vpc.test.id}"
   cidr_block = "${var.public_subnet_cidr}"
-  availability_zone = "us-west-1c"
+  availability_zone = "us-east-2c"
 
   tags = {
     Name = "Web Public Subnet"
@@ -25,7 +25,7 @@ resource "aws_subnet" "public-subnet" {
 resource "aws_subnet" "private-subnet" {
   vpc_id = "${aws_vpc.test.id}"
   cidr_block = "${var.private_subnet_cidr}"
-  availability_zone = "us-west-1b"
+  availability_zone = "us-east-2b"
 
   tags = {
     Name = "Database Private Subnet"
